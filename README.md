@@ -1,4 +1,15 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+# 2D Golf
+
+## Descriere
+Jocul simulează o experiență de "Mini Golf" cu diverse tipuri de obstacole și mecanici fizice. Scopul este să introduceți mingea în gaură din cât mai puține lovituri.
+
+## Obstacole
+
+*   **Pereți:** Mingea ricoșează.
+*   **Nisip:** Încetinește mingea.
+*   **Apă:** Mingea este resetată la poziția de start.
+*   **Găură Negră:** Atrage mingea gravitațional.
+*   **Găură Albă:** Resping mingea sau funcționează ca destinație de teleportare pentru găurile negre.
 
 ### Folosiți template-ul corespunzător grupei voastre!
 
