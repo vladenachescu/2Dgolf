@@ -6,48 +6,34 @@
 // Keep the checks on in every build type.
 #undef NDEBUG
 #include <cassert>
-#include <stdexcept>
-
-#include "Example.h"      // the library under test; include/ comes from oop
-
-static_assert(Example::limit > 0, "the invariant below assumes a positive limit");
+#include  "Vector2D.h"
+#include "Ball.h"
+#include "Water.h"
+#include "Hole.h" // the library under test; include/ comes from oop
 
 // checked through the public interface only: the helper behind the invariant is
-// file-local in src/Example.cpp and cannot even be named here
+
+void testWater() {
+    Water apa(4.0f, 6.0f, -2.0f, 2.0f);
+    Ball minge(Vector2D(0.0f, 0.0f));
+    minge.loveste(100.0f, 0.0f);
+    minge.actualizeazaPozitia(0.1f);
+    apa.interact(minge, Vector2D(0.0f, 0.0f), 0.1f);
+    assert(minge.getPoz().dist(Vector2D(0.0f, 0.0f)) < 1e-3f);
+}
+
+void testHole() {
+    Ball minge(Vector2D(0.0f, 0.0f));
+    Hole gaura(Vector2D(10.0f, 0.0f ),1.0f);
+    minge.loveste(100.0f, 0.0f);
+    assert(!gaura.contine(minge.getPoz()));
+    minge.actualizeazaPozitia(0.1f);
+    assert(gaura.contine(minge.getPoz()));
+}
 int main() {
-    Example e;
-    assert(e.value() == 0);
-
-    e.add(7);
-    assert(e.value() == 7);
-    e.add(-7);
-    assert(e.value() == 0);
-
-    bool threw = false;
-    try {
-        e.add(-1);
-    } catch (const std::invalid_argument&) {
-        threw = true;
-    }
-    assert(threw && "add() must refuse to go below 0");
-    assert(e.value() == 0 && "a failed call leaves the object untouched");
-
-    threw = false;
-    try {
-        e.add(Example::limit + 1);
-    } catch (const std::invalid_argument&) {
-        threw = true;
-    }
-    assert(threw && "add() must refuse to go above limit");
-
-    threw = false;
-    try {
-        Example broken{Example::limit + 1};
-        (void) broken;
-    } catch (const std::invalid_argument&) {
-        threw = true;
-    }
-    assert(threw && "the constructor must not hand out a broken object either");
-
+    testWater();
+    testHole();
     return 0;
+
+
 }
