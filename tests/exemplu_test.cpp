@@ -18,8 +18,10 @@ void testWater() {
     Ball minge(Vector2D(0.0f, 0.0f));
     minge.loveste(100.0f, 0.0f);
     minge.actualizeazaPozitia(0.1f);
+
     apa.interact(minge, Vector2D(0.0f, 0.0f), 0.1f);
-    assert(minge.getPoz().dist(Vector2D(0.0f, 0.0f)) < 1e-3f);
+    const float dist = minge.getPoz().dist(Vector2D(0.0f, 0.0f));
+    assert(dist < 1e-3f);
 }
 
 void testHole() {
